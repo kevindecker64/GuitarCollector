@@ -9,4 +9,5 @@ urlpatterns = [
     path("guitars/create/", views.GuitarCreate.as_view(), name="guitars_create"),
     path("guitars/<int:pk>/update/", views.GuitarUpdate.as_view(), name="guitars_update"),
     path("guitars/<int:pk>/delete/", views.GuitarDelete.as_view(), name="guitars_delete"),
+    path("guitars/<int:guitar_id>/add_setup", views.add_setup, name="add_setup"),
 ]
