@@ -23,6 +23,10 @@ def guitars_detail(request, guitar_id):
     setup_form = SetUpForm()
     return render(request, "guitars/detail.html", {"guitar": guitar, 'setup_form': setup_form, 'woods': woods_guit_doesnt_have})
 
+def assoc_wood(request, guitar_id, wood_id):
+    Guitar.objects.get(id=guitar_id).woods.add(wood_id)
+    return redirect('detail', guitar_id=guitar_id)
+
 def add_setup(request, guitar_id):
     form = SetUpForm(request.POST)
     if form.is_valid():
