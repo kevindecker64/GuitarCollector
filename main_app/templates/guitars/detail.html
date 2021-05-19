@@ -55,6 +55,8 @@
       <div class="card">
         {% for wood in guitar.woods.all %}
           <div class="card-content">
+            <span><a href="{% url "wood_remove" guitar.id wood.id %}">Remove</a></span>
+            &nbsp; &nbsp;
             {{ wood.get_part_display }}: {{ wood.type }}
           </div>
         {% endfor %}

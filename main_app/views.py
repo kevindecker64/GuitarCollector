@@ -27,6 +27,10 @@ def assoc_wood(request, guitar_id, wood_id):
     Guitar.objects.get(id=guitar_id).woods.add(wood_id)
     return redirect('detail', guitar_id=guitar_id)
 
+def wood_remove(request, guitar_id, wood_id):
+    Guitar.objects.get(id=guitar_id).woods.remove(wood_id)
+    return redirect('detail', guitar_id=guitar_id)
+
 def add_setup(request, guitar_id):
     form = SetUpForm(request.POST)
     if form.is_valid():
