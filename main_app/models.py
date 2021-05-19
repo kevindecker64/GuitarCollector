@@ -9,12 +9,29 @@ SERVICES = (
     ("S", "New Strings"),
 )
 
+WOOD_PARTS = (
+    ("B", "Body"),
+    ("N", "Neck"),
+    ("F", "Fingerboard")
+)
+
 # Create your models here.
+class Wood(models.Model):
+    part = models.CharField(max_length=1, choices=WOOD_PARTS)
+    type = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.get_part_display()}: {self.type}"
+
+    def get_absolute_url(self):
+        pass 
+
 class Guitar(models.Model):
     make = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
     year = models.IntegerField()
     description = models.TextField(max_length=250)
+    woods = models.ManyToManyField(Wood)
 
     def __str__(self):
         return self.model
