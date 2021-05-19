@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Guitar
+from .models import Guitar, Wood
 from .forms import SetUpForm
 
 
@@ -19,8 +19,9 @@ def guitars_index(request):
 
 def guitars_detail(request, guitar_id):
     guitar = Guitar.objects.get(id=guitar_id)
+    woods_guit_doesnt_have = Wood.objects.order_by('part').exclude(id__in = guitar.woods.all().values_list('id'))
     setup_form = SetUpForm()
-    return render(request, "guitars/detail.html", {"guitar": guitar, 'setup_form': setup_form})
+    return render(request, "guitars/detail.html", {"guitar": guitar, 'setup_form': setup_form, 'woods': woods_guit_doesnt_have})
 
 def add_setup(request, guitar_id):
     form = SetUpForm(request.POST)

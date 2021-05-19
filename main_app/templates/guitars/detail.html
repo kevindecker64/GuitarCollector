@@ -47,6 +47,45 @@
   </div>
 </div>
 
+<hr>
+
+<div class="row">
+  <div class="col s6">
+    <h3>Wood:</h3>
+    {% if guitar.woods.count %}
+      <div class="card">
+        {% for wood in guitar.woods.all %}
+          <div class="card-content">
+            {{ wood.get_part_display }}: {{ wood.type }}
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <h6>Add Wood</h6>
+    {% endif %}
+  </div>
+
+  <div class="col s6">
+    <h3>Available Woods</h3>
+    {% if woods.count %}
+      <div class="card">
+        {% for wood in woods.all %}
+          <div class="card-content">
+            {{ wood.get_part_display }}: {{ wood.type }}
+            <div class="card-action">
+              <form action="" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn">Add</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}    
+  </div>
+
+</div>
+
 <script>
   const dateEl = document.getElementById('id_date');
   M.Datepicker.init(dateEl, {
